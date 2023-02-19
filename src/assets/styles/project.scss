@@ -1,0 +1,33 @@
+.project {
+  align-items: center;
+  background-color: #ffe1bd;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+
+  & .project__name {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 43.58px;
+    margin: 17px 0 0;
+  }
+
+  & .project__create-btn {
+    background-color: #f8ca94;
+    border-radius: 10px;
+    color: #353535;
+    font-size: 26px;
+    font-weight: 500;
+    height: 60px;
+    margin: 39px 0 24px;
+    line-height: 26px;
+
+    @media screen and (min-width: $large-mobile-size) {
+      max-width: 1090px;
+    }
+  }
+
+  & .project__item-list {
+    margin-top: 10px;
+  }
+}

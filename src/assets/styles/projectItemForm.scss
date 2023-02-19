@@ -1,0 +1,151 @@
+.project-item-form {
+  display: flex;
+  flex-direction: column;
+
+  & .project-item-form__title {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 33px;
+
+    @media screen and (min-width: $mobile-size) {
+      font-size: 24px;
+    }
+  }
+
+  & .project-item-form__title-input,
+  & .project-item-form__date-input,
+  & .project-item-form__priority {
+    @include form-input-font-style;
+
+    background-color: $modal-bg-color;
+    border: none;
+    border-bottom: 3px solid #635f5f;
+    color: $form-input-color;
+    outline: none;
+  }
+
+  & .project-item-form__title-input {
+    margin-bottom: 16px;
+  }
+
+  & .project-item-form__date-input {
+    height: 37px;
+    margin-bottom: 23px;
+  }
+
+  & .project-item-form__priority {
+    background-color: rgba(123, 123, 123, 0.33);
+    border: none;
+    cursor: pointer;
+    height: 34px;
+    margin-bottom: 23px;
+
+    &.low,
+    & .low {
+      background-color: $select-low-option-bg-color;
+    }
+
+    &.medium,
+    & .medium {
+      background-color: $select-medium-option-bg-color;
+    }
+
+    &.high,
+    & .high {
+      background-color: $select-high-option-bg-color;
+    }
+  }
+
+  & .project-item-form__item-description {
+    @include form-input-font-style;
+
+    background-color: rgba(123, 123, 123, 0.33);
+    border: none;
+    color: #3f3b3b;
+    height: 130px;
+    margin-bottom: 15px;
+    outline: none;
+    resize: none;
+  }
+
+  & .project-item-form__btn-container {
+    @media screen and (min-width: $large-mobile-size) {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    & .button {
+      @include form-input-font-style;
+      color: #000;
+      height: 42px;
+      position: relative;
+
+      @media screen and (min-width: $large-mobile-size) {
+        max-width: 100%;
+      }
+    }
+
+    & .button:not(:last-child) {
+      margin-bottom: 8px;
+    }
+
+    & .project-item-form__add-button {
+      background-color: $add-btn-bg-color;
+
+      &::before {
+        content: '';
+        display: block;
+        background-image: url('../img/btnSaveIcon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 37px;
+        position: absolute;
+        top: 6px;
+        left: calc(50% - 37px/2 - 48px);
+        width: 37px;
+      }
+
+      &.create {
+        &::before {
+          display: none;
+        }
+      }
+    }
+
+    & .project-item-form__mark-button {
+      background-color: #7e8bf9;
+
+      &::before {
+        content: '';
+        display: block;
+        background-image: url('../img/btnStatusIcon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 38px;
+        position: absolute;
+        top: 4px;
+        left: calc(50% - 38px/2 - 110px);
+        width: 38px;
+      }
+    }
+
+    & .project-item-form__delete-button {
+      background-color: #ff5757;
+
+      &::before {
+        content: '';
+        display: block;
+        background-image: url('../img/btnDeleteIcon.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 27px;
+        position: absolute;
+        top: 7px;
+        left: calc(50% - 38px/2 - 46.5px);
+        width: 38px;
+      }
+    }
+  }
+}

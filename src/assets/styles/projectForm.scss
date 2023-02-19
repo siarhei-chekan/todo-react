@@ -1,0 +1,15 @@
+.project-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+  & .project-form__title-input {
+    @include form-input-font-style;
+    width: 100%;
+  }
+
+  & .project-form__create-btn {
+    background-color: $add-btn-bg-color;
+    margin-top: 15px;
+  }
+}

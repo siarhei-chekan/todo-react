@@ -1,0 +1,45 @@
+@import "./variables.scss";
+@import "./mixin.scss";
+@import "../../App.scss";
+@import "./header.scss";
+@import "./fonts.scss";
+@import "./project.scss";
+@import "./sidebar.scss";
+@import "../styles/UI/button.scss";
+@import "../styles/UI/modal.scss";
+@import "./projectForm.scss";
+@import "./projectItemForm.scss";
+@import "./projectItemList.scss";
+@import "./projectItem.scss";
+
+:root {
+  --modal-bg-color: #ffd7a7;
+  --form-input-color: #585353;
+  --select-low-option-bg-color: #ffd8a9;
+  --select-medium-option-bg-color: #ffb760;
+  --select-high-option-bg-color: #faa136;
+  --add-btn-bg-color: #7fdb88;
+
+  background-color: #e5e5e5;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+
+  & div:nth-child(2) {
+    flex-grow: 1;
+  }
+}

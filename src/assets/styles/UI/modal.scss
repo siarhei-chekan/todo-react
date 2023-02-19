@@ -1,0 +1,36 @@
+.modal {
+  background-color: rgba(33, 33, 33, 0.48);
+  display: none;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  transform: scale(0);
+  transition: all 0.5s ease;
+
+  &.visible {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transform: scale(1);
+  }
+
+  & .modal-content {
+    background-color: $modal-bg-color;
+    border-radius: 8px;
+    box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.25);
+    min-width: 250px;
+    max-width: 335px;
+    padding: 16px 21px;
+    width: 100%;
+
+    @media screen and (min-width: $mobile-size) {
+      max-width: 358px;
+    }
+
+    @media screen and (min-width: $large-mobile-size) {
+      max-width: 722px;
+    }
+  }
+}

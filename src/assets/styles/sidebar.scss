@@ -1,0 +1,61 @@
+.sidebar {
+  align-items: center;
+  background-color: #fffbef;
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+
+  &.open {
+    display: flex;
+  }
+
+  @media screen and (min-width: $large-mobile-size) {
+    display: flex;
+    position: static;
+    width: 297px;
+  }
+
+  & .sidebar__title {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 48px;
+    margin: 23px 0 25px;
+
+    @media screen and (min-width: $large-mobile-size) {
+      font-size: 32px;  
+      margin: 23px 0 19px;
+    }
+  }
+
+  & .sidebar__create-btn {
+    background: rgba(209, 198, 158, 0.7);
+    margin: 0 0 22px 0;
+
+    @media screen and (min-width: $mobile-size) {
+      max-width: 347px;
+    }
+
+    @media screen and (min-width: $large-mobile-size) {
+      max-width: 254px;
+    }
+  }
+
+  & .projects-list {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    & .project-link {
+      align-items: center;
+      background: rgba(244, 208, 137, 0.4);
+      color: #535151;     
+      display: flex;
+      justify-content: center;
+      margin: 0 0 22px 0;
+      text-decoration: none;
+    }
+  }
+}
