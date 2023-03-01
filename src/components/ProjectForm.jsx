@@ -1,7 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const ProjectForm = ({ onClickAddBtnHandler }) => {
+const ProjectForm = ({ action, project, isModalVisible, onClickAddBtnHandler }) => {
   const [projectTitle, setProjectTitle] = useState("");
+
+  const addBtnClassName =
+    action === "create"
+      ? "project-form__create-btn create button"
+      : "project-form__create-btn button";
+
+  useEffect(() => {
+    if (action === "edit" && isModalVisible) {
+      setProjectTitle(project?.title);
+      
+    } else if (!isModalVisible) {
+      setProjectTitle('');
+    }
+  }, [action, isModalVisible]);
 
   return (
     <form className="project-form" onSubmit={(e) => e.preventDefault()}>
@@ -15,10 +29,10 @@ const ProjectForm = ({ onClickAddBtnHandler }) => {
       />
       <button
         type="button"
-        className="project-form__create-btn button"
-        onClick={() => onClickAddBtnHandler(projectTitle, setProjectTitle)}
+        className={addBtnClassName}
+        onClick={() => onClickAddBtnHandler(project?.id, projectTitle)}
       >
-        Add
+        {action === "create" ? "Add" : "Save"}
       </button>
     </form>
   );

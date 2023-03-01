@@ -8,6 +8,7 @@
   width: 100vw;
   transform: scale(0);
   transition: all 0.5s ease;
+  z-index: 9;
 
   &.visible {
     align-items: center;

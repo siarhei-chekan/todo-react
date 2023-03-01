@@ -55,7 +55,17 @@
       display: flex;
       justify-content: center;
       margin: 0 0 22px 0;
+      position: relative;
       text-decoration: none;
+
+      & .project-link__editBtn {
+        background: url('../img/editProjectIcon.svg') no-repeat;
+        height: 42px;
+        position: absolute;
+        right: 13px;
+        top: 4px;
+        width: 25px;
+      }
     }
   }
 }

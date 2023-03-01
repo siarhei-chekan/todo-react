@@ -5,20 +5,38 @@ import ProjectForm from "./ProjectForm";
 import Modal from "./UI/modal/Modal";
 
 const SideBar = ({ open, hideSidebar }) => {
-  const { projects, createProject } = useContext(ProjectsContext);
+  const { projects, createProject, editProject } = useContext(ProjectsContext);
   const [isModalVisible, setModalVisibility] = useState(false);
+  const [action, setAction] = useState("");
+  const [targetProject, setTargetProject] = useState(null);
 
   let className = "sidebar";
   className = open ? `${className} open` : "sidebar";
 
-  const onClickAddBtnHandler = (projectName, setProjectTitle) => {
+  const onClickNewBtnHandler = () => {
+    setAction("create");
+    setModalVisibility(true);
+  };
+
+  const onClickAddBtnHandler = (projectId, projectName) => {
     if (!projectName) {
       return;
     }
 
-    createProject(projectName);
-    setProjectTitle("");
+    if (action === "create") {
+      createProject(projectName);
+    } else if (action === "edit") {
+      editProject(projectId, projectName);
+    }
+
     setModalVisibility(false);
+  };
+
+  const onClickEditBtnHandler = (e, project) => {
+    e.preventDefault();
+    setAction("edit");
+    setTargetProject(project);
+    setModalVisibility(true);
   };
 
   return (
@@ -27,13 +45,18 @@ const SideBar = ({ open, hideSidebar }) => {
         isModalVisible={isModalVisible}
         setModalVisibility={setModalVisibility}
       >
-        <ProjectForm onClickAddBtnHandler={onClickAddBtnHandler} />
+        <ProjectForm
+          action={action}
+          isModalVisible={isModalVisible}
+          project={targetProject}
+          onClickAddBtnHandler={onClickAddBtnHandler}
+        />
       </Modal>
       <h3 className="sidebar__title">Projects</h3>
       <button
         type="button"
         className="sidebar__create-btn button"
-        onClick={() => setModalVisibility(true)}
+        onClick={() => onClickNewBtnHandler()}
       >
         New Project
       </button>
@@ -46,6 +69,10 @@ const SideBar = ({ open, hideSidebar }) => {
             onClick={hideSidebar}
           >
             {project.title}
+            <div
+              className="project-link__editBtn"
+              onClick={(e) => onClickEditBtnHandler(e, project)}
+            ></div>
           </Link>
         ))}
       </div>

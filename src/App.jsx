@@ -20,14 +20,33 @@ function App() {
     setProjects([...projects, project]);
   };
 
+  const editProject = (projectId, projectName) => {
+    const targetProject = projects.find((project) => project.id === projectId);
+    targetProject.title = projectName;
+  };
+
   const createProjectItem = (projectId, projectItem) => {
     const targetProject = projects.find((project) => project.id === projectId);
     targetProject.projectItems.push(projectItem);
   };
 
+  const editProjectItem = (projectId, projectItem) => {
+    const targetProject = projects.find((project) => project.id === projectId);
+    const targetProjectItem = targetProject.projectItems.find(
+      (item) => item.id === projectItem.id
+    );
+    Object.assign(targetProjectItem, projectItem);
+  };
+
   return (
     <ProjectsContext.Provider
-      value={{ projects, createProject, createProjectItem }}
+      value={{
+        projects,
+        createProject,
+        editProject,
+        createProjectItem,
+        editProjectItem,
+      }}
     >
       <BrowserRouter>
         <Routes>

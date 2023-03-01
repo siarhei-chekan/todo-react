@@ -1,13 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProjectsContext } from "../App";
 
-const ProjectItemForm = ({ action, projectId, setModalVisibility }) => {
-  const { createProjectItem } = useContext(ProjectsContext);
+const ProjectItemForm = ({
+  action,
+  projectId,
+  isModalVisible,
+  setModalVisibility,
+  projectItem,
+}) => {
+  const { createProjectItem, editProjectItem } = useContext(ProjectsContext);
 
   const [itemTitle, setItemTitle] = useState("");
   const [deadline, setDeadline] = useState("");
   const [itemPriority, setItemPriority] = useState("");
   const [itemDescription, setItemDescription] = useState("");
+
+  useEffect(() => {
+    if (action === "edit" && isModalVisible) {
+      setItemTitle(projectItem?.itemTitle);
+      setDeadline(projectItem?.deadline);
+      setItemPriority(projectItem?.itemPriority);
+      setItemDescription(projectItem?.itemDescription);
+    } else if (!isModalVisible) {
+      resetForm();
+    }
+  }, [action, isModalVisible]);
 
   const options = [
     { value: "", name: "Select Priority", disabled: true },
@@ -22,14 +39,19 @@ const ProjectItemForm = ({ action, projectId, setModalVisibility }) => {
       : "project-item-form__add-button button";
 
   function handleOnClick(action) {
-    console.log(`Form is ${action}!`);
-    createProjectItem(projectId, {
-      id: Date.now(),
+    const item = {
       itemTitle,
       deadline,
       itemPriority,
       itemDescription,
-    });
+    };
+
+    if (action === "create") {
+      createProjectItem(projectId, { id: Date.now(), ...item });
+    } else if (action === "edit") {
+      editProjectItem(projectId, { id: projectItem.id, ...item });
+    }
+
     setModalVisibility(false);
     resetForm();
   }
@@ -92,15 +114,22 @@ const ProjectItemForm = ({ action, projectId, setModalVisibility }) => {
         >
           {action === "create" ? "Add" : "Save"}
         </button>
-        <button type="button" className="project-item-form__mark-button button">
-          Mark Done/Not Done
-        </button>
-        <button
-          type="button"
-          className="project-item-form__delete-button button"
-        >
-          Delete
-        </button>
+        {action === "edit" && (
+          <button
+            type="button"
+            className="project-item-form__mark-button button"
+          >
+            Mark Done/Not Done
+          </button>
+        )}
+        {action === "edit" && (
+          <button
+            type="button"
+            className="project-item-form__delete-button button"
+          >
+            Delete
+          </button>
+        )}
       </div>
     </form>
   );

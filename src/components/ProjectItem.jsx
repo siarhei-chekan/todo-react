@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ProjectModalContext } from "./Project";
 
 const ProjectItem = ({ projectItem }) => {
-  const handleOnClick = () => console.log("Details button clicked");
+  const { onClickDetailBtnHandler } = useContext(ProjectModalContext);
 
   return (
     <div className={`project-item ${projectItem.itemPriority}`}>
@@ -9,7 +10,7 @@ const ProjectItem = ({ projectItem }) => {
       <button
         type="button"
         className="project-item__detail-btn button"
-        onClick={handleOnClick}
+        onClick={() => onClickDetailBtnHandler(projectItem)}
       >
         Details
       </button>

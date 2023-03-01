@@ -9,7 +9,29 @@
   }
 
   & .project-form__create-btn {
-    background-color: $add-btn-bg-color;
+    @include form-input-font-style;
+    background-color: $add-btn-bg-color;    
+    color: #000;
     margin-top: 15px;
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      background-image: url('../img/btnSaveIcon.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 37px;
+      position: absolute;
+      top: 6px;
+      left: calc(50% - 37px/2 - 48px);
+      width: 37px;
+    }
+
+    &.create {
+      &::before {
+        display: none;
+      }
+    }
   }
 }

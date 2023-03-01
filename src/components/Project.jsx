@@ -1,23 +1,40 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProjectItemForm from "./ProjectItemForm";
 import Modal from "./UI/modal/Modal";
 import ProjectItemList from "./ProjectItemList";
 import { ProjectsContext } from "../App";
 
+export const ProjectModalContext = createContext();
+
 const Project = () => {
   const { projects } = useContext(ProjectsContext);
 
-  const [project, setProject] = useState({}); //TODO убрать???
-  const [projectItemList, setProjectItemList] = useState([]); //TODO убрать???
+  const [project, setProject] = useState(null);
   const [isModalVisible, setModalVisibility] = useState(false);
+  const [action, setAction] = useState("");
+  const [targetProjectItem, setTargetProjectItem] = useState(null);
   const params = useParams();
+
+  const onClickNewItemBtnHandler = () => {
+    setAction("create");
+    setModalVisibility(true);
+  };
+
+  const onClickDetailBtnHandler = (projectItem) => {
+    setAction("edit");
+    setTargetProjectItem(projectItem);
+    setModalVisibility(true);
+  };
 
   useEffect(() => {
     const targetProject = projects.find((project) => project.id === +params.id);
-    setProject(targetProject);//TODO убрать??? Для отображения брать из COntext!
-    setProjectItemList(targetProject.projectItems);
+    setProject(targetProject);
   }, [params.id]);
+
+  if (!project) {
+    return null;
+  }
 
   return (
     <div className="project">
@@ -26,20 +43,24 @@ const Project = () => {
         setModalVisibility={setModalVisibility}
       >
         <ProjectItemForm
-          action={"create"}
+          action={action}
           projectId={project.id}
+          isModalVisible={isModalVisible}
           setModalVisibility={setModalVisibility}
+          projectItem={targetProjectItem}
         />
       </Modal>
       <h2 className="project__name">{project.title}</h2>
       <button
         type="button"
         className="project__create-btn button"
-        onClick={() => setModalVisibility(true)}
+        onClick={() => onClickNewItemBtnHandler()}
       >
         New Item
       </button>
-      <ProjectItemList projectItemList={projectItemList} />
+      <ProjectModalContext.Provider value={{ onClickDetailBtnHandler }}>
+        <ProjectItemList projectItemList={project.projectItems} />
+      </ProjectModalContext.Provider>
     </div>
   );
 };
