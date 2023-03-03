@@ -5,7 +5,9 @@ const ProjectItem = ({ projectItem }) => {
   const { onClickDetailBtnHandler } = useContext(ProjectModalContext);
 
   return (
-    <div className={`project-item ${projectItem.itemPriority}`}>
+    <div
+      className={`project-item ${projectItem.itemPriority} ${projectItem.itemStatus}`}
+    >
       <h3 className="project-item__name">{projectItem.itemTitle}</h3>
       <button
         type="button"

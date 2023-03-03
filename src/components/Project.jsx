@@ -23,14 +23,14 @@ const Project = () => {
 
   const onClickDetailBtnHandler = (projectItem) => {
     setAction("edit");
-    setTargetProjectItem(projectItem);
+    setTargetProjectItem({ ...targetProjectItem, ...projectItem });
     setModalVisibility(true);
   };
 
   useEffect(() => {
     const targetProject = projects.find((project) => project.id === +params.id);
-    setProject(targetProject);
-  }, [params.id]);
+    setProject({ ...targetProject });
+  }, [params?.id, projects]);
 
   if (!project) {
     return null;

@@ -9,6 +9,7 @@
 
   &.open {
     display: flex;
+    z-index: 1;
   }
 
   @media screen and (min-width: $large-mobile-size) {

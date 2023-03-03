@@ -126,8 +126,14 @@
         height: 38px;
         position: absolute;
         top: 4px;
-        left: calc(50% - 38px/2 - 110px);
+        left: calc(50% - 38px/2 - 48px);
         width: 38px;
+      }
+
+      &.done {
+        &::before {
+          display: none;
+        }
       }
     }
 

@@ -33,6 +33,7 @@ const SideBar = ({ open, hideSidebar }) => {
   };
 
   const onClickEditBtnHandler = (e, project) => {
+    e.stopPropagation();
     e.preventDefault();
     setAction("edit");
     setTargetProject(project);

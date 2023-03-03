@@ -8,17 +8,17 @@
   padding: 0 5px;
   width: 100%;
 
-    &.low {
-      background-color: $select-low-option-bg-color;
-    }
+  &.low {
+    background-color: $select-low-option-bg-color;
+  }
 
-    &.medium {
-      background-color: $select-medium-option-bg-color;
-    }
+  &.medium {
+    background-color: $select-medium-option-bg-color;
+  }
 
-    &.high {
-      background-color: $select-high-option-bg-color;
-    }
+  &.high {
+    background-color: $select-high-option-bg-color;
+  }
 
   @media screen and (min-width: $large-mobile-size) {
     max-width: 1090px;
@@ -41,6 +41,14 @@
 
     @media screen and (min-width: $large-mobile-size) {
       max-width: 100%;
+    }
+  }
+
+  &.done {
+    opacity: 0.3;
+
+    & .project-item__name {
+      text-decoration: line-through;
     }
   }
 }

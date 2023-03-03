@@ -14,6 +14,7 @@ const ProjectItemForm = ({
   const [deadline, setDeadline] = useState("");
   const [itemPriority, setItemPriority] = useState("");
   const [itemDescription, setItemDescription] = useState("");
+  const [itemStatus, setItemStatus] = useState("notDone");
 
   useEffect(() => {
     if (action === "edit" && isModalVisible) {
@@ -21,6 +22,7 @@ const ProjectItemForm = ({
       setDeadline(projectItem?.deadline);
       setItemPriority(projectItem?.itemPriority);
       setItemDescription(projectItem?.itemDescription);
+      setItemStatus(projectItem?.itemStatus);
     } else if (!isModalVisible) {
       resetForm();
     }
@@ -44,6 +46,7 @@ const ProjectItemForm = ({
       deadline,
       itemPriority,
       itemDescription,
+      itemStatus,
     };
 
     if (action === "create") {
@@ -55,12 +58,16 @@ const ProjectItemForm = ({
     setModalVisibility(false);
     resetForm();
   }
+  function statusBtnOnClickHandler() {
+    itemStatus === "notDone" ? setItemStatus("done") : setItemStatus("notDone");
+  }
 
   function resetForm() {
     setItemTitle("");
     setDeadline("");
     setItemPriority("");
     setItemDescription("");
+    setItemStatus("notDone");
   }
 
   return (
@@ -117,9 +124,10 @@ const ProjectItemForm = ({
         {action === "edit" && (
           <button
             type="button"
-            className="project-item-form__mark-button button"
+            className={`project-item-form__mark-button ${itemStatus} button`}
+            onClick={() => statusBtnOnClickHandler()}
           >
-            Mark Done/Not Done
+            {itemStatus === "notDone" ? "Done" : "Not Done"}
           </button>
         )}
         {action === "edit" && (

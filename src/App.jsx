@@ -21,21 +21,49 @@ function App() {
   };
 
   const editProject = (projectId, projectName) => {
-    const targetProject = projects.find((project) => project.id === projectId);
-    targetProject.title = projectName;
+    setProjects(
+      projects.map((project) => {
+        if (project.id === projectId) {
+          return { ...project, title: projectName };
+        } else {
+          return project;
+        }
+      })
+    );
   };
 
   const createProjectItem = (projectId, projectItem) => {
-    const targetProject = projects.find((project) => project.id === projectId);
-    targetProject.projectItems.push(projectItem);
+    setProjects(
+      projects.map((project) => {
+        if (project.id === projectId) {
+          return {
+            ...project,
+            projectItems: [...project?.projectItems, projectItem],
+          };
+        } else {
+          return project;
+        }
+      })
+    );
   };
 
   const editProjectItem = (projectId, projectItem) => {
-    const targetProject = projects.find((project) => project.id === projectId);
-    const targetProjectItem = targetProject.projectItems.find(
-      (item) => item.id === projectItem.id
+    setProjects(
+      projects.map((project) => {
+        if (project.id === projectId) {
+          const editedProjectItems = project?.projectItems.map((item) => {
+            if (item.id === projectItem.id) {
+              return { item, ...projectItem };
+            } else {
+              return item;
+            }
+          });
+          return { ...project, projectItems: editedProjectItems };
+        } else {
+          return project;
+        }
+      })
     );
-    Object.assign(targetProjectItem, projectItem);
   };
 
   return (
