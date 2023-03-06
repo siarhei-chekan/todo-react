@@ -34,4 +34,25 @@
       }
     }
   }
+
+  & .project-form__delete-button {
+    @include form-input-font-style;
+    background-color: $delete-btn-bg-color;
+    color: #000;
+    margin-top: 15px;
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      background-image: url('../img/btnDeleteIcon.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 27px;
+      position: absolute;
+      top: 7px;
+      left: calc(50% - 38px/2 - 46.5px);
+      width: 38px;
+    }
+  }
 }

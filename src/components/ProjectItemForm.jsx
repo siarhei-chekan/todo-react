@@ -8,7 +8,8 @@ const ProjectItemForm = ({
   setModalVisibility,
   projectItem,
 }) => {
-  const { createProjectItem, editProjectItem } = useContext(ProjectsContext);
+  const { createProjectItem, editProjectItem, deleteProjectItem } =
+    useContext(ProjectsContext);
 
   const [itemTitle, setItemTitle] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -60,6 +61,12 @@ const ProjectItemForm = ({
   }
   function statusBtnOnClickHandler() {
     itemStatus === "notDone" ? setItemStatus("done") : setItemStatus("notDone");
+  }
+
+  function deleteBtnOnClickHandler() {
+    deleteProjectItem(projectId, projectItem.id);
+    setModalVisibility(false);
+    resetForm();
   }
 
   function resetForm() {
@@ -134,6 +141,7 @@ const ProjectItemForm = ({
           <button
             type="button"
             className="project-item-form__delete-button button"
+            onClick={() => deleteBtnOnClickHandler()}
           >
             Delete
           </button>

@@ -5,6 +5,12 @@
   flex-direction: column;
   padding: 0 16px;
 
+  &.no-project-info {
+    font-size: 32px;
+    flex-grow: 1;
+    padding-top: 32px;
+  }
+
   & .project__name {
     font-size: 32px;
     font-weight: 400;

@@ -4,7 +4,7 @@ import ProjectItem from "./ProjectItem";
 const ProjectItemList = ({ projectItemList }) => {
   return (
     <div className="project-item-list">
-      {projectItemList.map((projectItem) => {
+      {projectItemList && projectItemList.map((projectItem) => {
         return <ProjectItem key={projectItem.id} projectItem={projectItem} />;
       })}
     </div>

@@ -32,6 +32,10 @@ function App() {
     );
   };
 
+  const deleteProject = (projectId) => {
+    setProjects(projects.filter((project) => project.id !== projectId));      
+  };
+
   const createProjectItem = (projectId, projectItem) => {
     setProjects(
       projects.map((project) => {
@@ -66,22 +70,36 @@ function App() {
     );
   };
 
+  const deleteProjectItem = (projectId, projectItemId) => {
+    setProjects(
+      projects.map((project) => {
+        if (project.id === projectId) {
+          const filteredProjectItems = project.projectItems.filter(
+            (item) => item.id !== projectItemId
+          );
+          return { ...project, projectItems: filteredProjectItems };
+        } else {
+          return project;
+        }
+      })
+    );
+  };
+
   return (
     <ProjectsContext.Provider
       value={{
         projects,
         createProject,
         editProject,
+        deleteProject,
         createProjectItem,
         editProjectItem,
+        deleteProjectItem,
       }}
     >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            {/* <Route path='/projects' element={<Home />}>
-            <Route path='/projects/:id' element={<Project />} />
-          </Route> */}
             <Route path="/projects/:id" element={<Project />} />
             <Route path="/login" element={<Login />} />
             <Route path="/*" element={<NoPage />} />

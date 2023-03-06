@@ -5,7 +5,7 @@ import ProjectForm from "./ProjectForm";
 import Modal from "./UI/modal/Modal";
 
 const SideBar = ({ open, hideSidebar }) => {
-  const { projects, createProject, editProject } = useContext(ProjectsContext);
+  const { projects, createProject, editProject, deleteProject } = useContext(ProjectsContext);
   const [isModalVisible, setModalVisibility] = useState(false);
   const [action, setAction] = useState("");
   const [targetProject, setTargetProject] = useState(null);
@@ -40,6 +40,11 @@ const SideBar = ({ open, hideSidebar }) => {
     setModalVisibility(true);
   };
 
+  const onClickDeleteBtnHandler = (projectId) => {
+    deleteProject(projectId);
+    setModalVisibility(false);
+  }
+
   return (
     <div className={className}>
       <Modal
@@ -51,6 +56,7 @@ const SideBar = ({ open, hideSidebar }) => {
           isModalVisible={isModalVisible}
           project={targetProject}
           onClickAddBtnHandler={onClickAddBtnHandler}
+          onClickDeleteBtnHandler={onClickDeleteBtnHandler}
         />
       </Modal>
       <h3 className="sidebar__title">Projects</h3>

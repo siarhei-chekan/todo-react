@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-const ProjectForm = ({ action, project, isModalVisible, onClickAddBtnHandler }) => {
+const ProjectForm = ({
+  action,
+  project,
+  isModalVisible,
+  onClickAddBtnHandler,
+  onClickDeleteBtnHandler
+}) => {
   const [projectTitle, setProjectTitle] = useState("");
 
   const addBtnClassName =
@@ -11,9 +17,8 @@ const ProjectForm = ({ action, project, isModalVisible, onClickAddBtnHandler }) 
   useEffect(() => {
     if (action === "edit" && isModalVisible) {
       setProjectTitle(project?.title);
-      
     } else if (!isModalVisible) {
-      setProjectTitle('');
+      setProjectTitle("");
     }
   }, [action, isModalVisible]);
 
@@ -34,6 +39,15 @@ const ProjectForm = ({ action, project, isModalVisible, onClickAddBtnHandler }) 
       >
         {action === "create" ? "Add" : "Save"}
       </button>
+      {action === "edit" && (
+        <button
+          type="button"
+          className="project-form__delete-button button"
+          onClick={() => onClickDeleteBtnHandler(project?.id)}
+        >
+          Delete
+        </button>
+      )}
     </form>
   );
 };

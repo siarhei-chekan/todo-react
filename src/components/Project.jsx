@@ -29,11 +29,15 @@ const Project = () => {
 
   useEffect(() => {
     const targetProject = projects.find((project) => project.id === +params.id);
-    setProject({ ...targetProject });
+    if (targetProject) {
+      setProject({ ...targetProject });
+    } else {
+      setProject(null);
+    }
   }, [params?.id, projects]);
 
   if (!project) {
-    return null;
+    return <p className="project no-project-info">Create new project</p>;
   }
 
   return (
@@ -59,7 +63,7 @@ const Project = () => {
         New Item
       </button>
       <ProjectModalContext.Provider value={{ onClickDetailBtnHandler }}>
-        <ProjectItemList projectItemList={project.projectItems} />
+        <ProjectItemList projectItemList={project?.projectItems} />
       </ProjectModalContext.Provider>
     </div>
   );
