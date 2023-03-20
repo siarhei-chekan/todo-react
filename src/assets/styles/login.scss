@@ -1,0 +1,37 @@
+.login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
+  padding: 0 16px;
+
+  & .login__title {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  & .login__form {
+    align-items: center;
+    background-color: $modal-bg-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    padding: 16px;
+    width: 100%;
+
+    & .input {
+      height: 32px;
+      margin-bottom: 15px;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    & .login-btn {
+      background-color: $add-btn-bg-color;
+      color: $form-input-color;
+      margin-top: 32px;
+    }
+  }
+}

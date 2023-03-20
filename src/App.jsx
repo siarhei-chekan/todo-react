@@ -1,7 +1,6 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Project from "./components/Project";
-// import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
@@ -9,7 +8,14 @@ import NoPage from "./pages/NoPage";
 export const ProjectsContext = createContext();
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
   const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("auth")) {
+      setIsAuth(true);
+    }
+  }, []);
 
   const createProject = (projectName) => {
     const project = {
@@ -33,7 +39,7 @@ function App() {
   };
 
   const deleteProject = (projectId) => {
-    setProjects(projects.filter((project) => project.id !== projectId));      
+    setProjects(projects.filter((project) => project.id !== projectId));
   };
 
   const createProjectItem = (projectId, projectItem) => {
@@ -95,16 +101,25 @@ function App() {
         createProjectItem,
         editProjectItem,
         deleteProjectItem,
+        isAuth,
+        setIsAuth
       }}
     >
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/projects/:id" element={<Project />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/*" element={<NoPage />} />
-          </Route>
-        </Routes>
+        {isAuth ? (
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/projects/:id" element={<Project />} />
+              <Route path="/*" element={<NoPage />} />
+            </Route>
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Login />}>
+              <Route path="*" element={<Login />} />
+            </Route>
+          </Routes>
+        )}
       </BrowserRouter>
     </ProjectsContext.Provider>
   );

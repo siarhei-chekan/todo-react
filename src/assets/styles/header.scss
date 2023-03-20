@@ -31,4 +31,17 @@
       width: 53px;
     }
   }
+
+  & .header__profile {
+    & .header__profile_userName {
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    & .header__profile_logoutBtn {
+      background-color: red;
+      height: 32px;
+      padding: 0 8px;
+    }
+  }
 }
